@@ -10,20 +10,23 @@ export class LessonResolver{
     ){}
 
     @Query(returns => LessonType)
-    lesson(){
+    lesson(
+        @Args('id') id: string
+    ){
 
-        return{
-            id: 'aaadadadadd',
-            name: 'Physics Class',
-            startDate: (new Date()).toISOString(),
-            endDate: (new Date()).toISOString()
-        }
+        return this.lessonservice.getLesson(id);
+        // return{
+        //     id: 'aaadadadadd',
+        //     name: 'Physics Class',
+        //     startDate: (new Date()).toISOString(),
+        //     endDate: (new Date()).toISOString()
+        // }
     }
 
     @Mutation(returns => LessonType)
     createLesson(
         @Args('name') name: string,
-        @Args('startdate') startDate: string,
+        @Args('startDate') startDate: string,
         @Args('endDate') endDate: string
     ){
         return this.lessonservice.createLesson(name, startDate, endDate);
